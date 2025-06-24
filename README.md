@@ -5,7 +5,7 @@ A Streamlit-powered app that scrapes comments from any YouTube video and analyze
 - 🔍 Top insightful keywords (using KeyBERT)
 - ☁️ Smart word cloud of what people actually care about
 
-> Built using Hugging Face Transformers, PyTorch, and KeyBERT. No API key needed!
+> Built using Hugging Face Transformers, PyTorch, and KeyBERT.
 
 ---
 
