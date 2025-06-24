@@ -1,0 +1,10 @@
+streamlit
+transformers
+torch
+scipy
+keybert
+sentence-transformers
+youtube-comment-downloader
+scikit-learn
+matplotlib
+pandas
