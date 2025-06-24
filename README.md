@@ -1,4 +1,4 @@
-# 🎥 YTInsight AI — Smart YouTube Comment Analyzer 🚀
+# 🎥 YTInsight AI — Smart YouTube Comment Analyzer 
 
 A Streamlit-powered app that scrapes comments from any YouTube video and analyzes:
 - 📊 Audience sentiment (positive, neutral, negative)
