@@ -9,7 +9,7 @@ A Streamlit-powered app that scrapes comments from any YouTube video and analyze
 
 ---
 
-## 🖼️ Demo Preview
+## 🖼️ App Link:
 https://ytinsightai.streamlit.app/
 
 
