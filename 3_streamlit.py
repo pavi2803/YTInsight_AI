@@ -34,7 +34,7 @@ def get_sentiment(text):
     return labels[scores.argmax()], scores
 
 # Streamlit UI
-st.title("📺 YouTube Comment Analyzer")
+st.title("YT Insight AI")
 video_url = st.text_input("Paste YouTube video URL:", "")
 
 if video_url:
@@ -43,37 +43,40 @@ if video_url:
         comments = downloader.get_comments_from_url(video_url)
         comment_list = [c['text'] for c in comments][:200]
 
-    st.success(f"Collected {len(comment_list)} comments!")
+        if(len(comment_list)<1):
+            st.success(f"No Comments Found for this Video!")
 
-    # Sentiment Analysis
-    with st.spinner("Analyzing sentiment..."):
-        sentiments = [get_sentiment(c)[0] for c in comment_list]
-        sentiment_counts = pd.Series(sentiments).value_counts()
+        else:
+            st.success(f"Collected {len(comment_list)} comments!")
 
-        st.subheader("📊 Sentiment Distribution")
-        st.bar_chart(sentiment_counts)
+            # Sentiment Analysis
+            with st.spinner("Analyzing sentiment..."):
+                sentiments = [get_sentiment(c)[0] for c in comment_list]
+                sentiment_counts = pd.Series(sentiments).value_counts()
 
-    # KeyBERT Keyword Extraction
-    with st.spinner("Extracting keywords..."):
-        text = " ".join(comment_list)
-        keywords = kw_model.extract_keywords(text, keyphrase_ngram_range=(1, 2), stop_words='english', top_n=15)
-        df_keywords = pd.DataFrame(keywords, columns=["Keyword", "Score"])
+                st.subheader("📊 Sentiment Distribution")
+                st.bar_chart(sentiment_counts)
 
-    from wordcloud import WordCloud
+            # KeyBERT Keyword Extraction
+            with st.spinner("Extracting keywords..."):
+                text = " ".join(comment_list)
+                keywords = kw_model.extract_keywords(text, keyphrase_ngram_range=(1, 2), stop_words='english', top_n=15)
+                df_keywords = pd.DataFrame(keywords, columns=["Keyword", "Score"])
 
-    st.subheader("☁️ Smart Word Cloud (KeyBERT)")
+            from wordcloud import WordCloud
 
-    # Convert keywords and scores into dictionary
-    keyword_dict = {word: score for word, score in keywords}
+            st.subheader("☁️ Smart Word Cloud - with KeyBert")
 
-    # Create word cloud
-    wordcloud = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(keyword_dict)
+            # Convert keywords and scores into dictionary
+            keyword_dict = {word: score for word, score in keywords}
 
-    # Display in Streamlit
-    import matplotlib.pyplot as plt
+            # Create word cloud
+            wordcloud = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(keyword_dict)
 
-    fig, ax = plt.subplots(figsize=(10, 5))
-    ax.imshow(wordcloud, interpolation='bilinear')
-    ax.axis('off')
-    st.pyplot(fig)
+            # Display in Streamlit
+            import matplotlib.pyplot as plt
 
+            fig, ax = plt.subplots(figsize=(10, 5))
+            ax.imshow(wordcloud, interpolation='bilinear')
+            ax.axis('off')
+            st.pyplot(fig)
