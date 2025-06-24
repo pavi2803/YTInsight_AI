@@ -65,7 +65,7 @@ if video_url:
 
             from wordcloud import WordCloud
 
-            st.subheader("☁️ Smart Word Cloud - with KeyBert")
+            st.subheader("☁️ Comments section Word Cloud - with KeyBert")
 
             # Convert keywords and scores into dictionary
             keyword_dict = {word: score for word, score in keywords}
